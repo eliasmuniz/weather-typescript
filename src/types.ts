@@ -1,6 +1,6 @@
 export type City = {
-    id: string,
-    name: string,
-    lat: number,
-    lon: number,
-  }
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+};

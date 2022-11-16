@@ -4,34 +4,33 @@ import api, { type Weather } from "./api";
 
 console.log(import.meta.env.VITE_API_KEY);
 
-
 // espcificamos en el tipado que es un objeto en el que
 // las keys son strings y los valores son cities
 const CITIES: Record<string, City> = {
-  mendoza:{
+  bariloche: {
+    id: "bariloche",
+    name: "Bariloche",
+    lat: -41.1333,
+    lon: -71.3103,
+  },
+  mendoza: {
     id: "mendoza",
     name: "Mendoza",
     lat: -32.888355,
     lon: -68.838844,
   },
-  bariloche:{
-    id: "bariloche",
-    name: "Bariloche",
-    lat: 0,
-    lon: 0,
-  },
-  sanjuan:{
-    id: "san juan",
+  sanjuan: {
+    id: "sanjuan",
     name: "San Juan",
-    lat: 0,
-    lon: 0,
+    lat: -31.5375,
+    lon: -68.53639,
   },
 };
 
 function App() {
   const [status, setStatus] = useState<"pending" | "resolved">("pending");
   const [weather, setWeather] = useState<Weather | null>(null);
-  const [city, setCity] = useState<City>(CITIES['mendoza']);
+  const [city, setCity] = useState<City>(CITIES["mendoza"]);
 
   function handleChangeCity(event: React.ChangeEvent) {
     const city = event?.target.value as keyof typeof CITIES;
@@ -43,6 +42,8 @@ function App() {
       setWeather(weather);
       setStatus("resolved");
     });
+    console.log(city);
+    
   }, [city]);
 
   if (status === "pending") {
@@ -67,7 +68,7 @@ function App() {
       <ul>
         {weather.forecast.map((forecast, index) => (
           <li key={index}>
-            Min: {forecast.min}, Max: {forecast.max}{" "}
+            Día: {forecast.date}, Min: {forecast.min}C°, Max: {forecast.max}C°
           </li>
         ))}
       </ul>
